@@ -1,19 +1,21 @@
-import { StyleSheet, Text, View, SafeAreaView, StatusBar } from 'react-native';
+import { SafeAreaView, StatusBar } from 'react-native';
+import { ScaledSheet } from 'react-native-size-matters';
 import { COLORS } from './assets/colors';
-import { HomeHeader } from './components/shared';
+import { Home } from './components/screens/Home/Home';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.body}>
       <StatusBar animated={true} backgroundColor={COLORS.white} barStyle="dark-content" />
-      <HomeHeader />
+      <Home />
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
   body: {
-    flex: 1,
+    width: '100%',
+    height: '100%',
     backgroundColor: COLORS.white,
   },
 });
