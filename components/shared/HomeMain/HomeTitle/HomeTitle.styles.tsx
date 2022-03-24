@@ -1,14 +1,7 @@
 import { ScaledSheet } from "react-native-size-matters";
-import { COLORS } from "../../../assets/colors";
+import { COLORS } from "../../../../assets/colors";
 
 export const styles = ScaledSheet.create({
-    // greetings
-    container: {
-        backgroundColor: COLORS.light_green,
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        flex: 1,
-    },
     // introduction
     introContainer: {
         paddingTop: '30@s',
@@ -66,33 +59,4 @@ export const styles = ScaledSheet.create({
         fontSize: '14@s',
         color: COLORS.white,
     },
-    // main
-    mainContainer: {
-        backgroundColor: COLORS.dark_green,
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        paddingTop: '30@s',
-        paddingHorizontal: '16@s',
-        flex: 1,
-    },
-    // buttons
-    buttonContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    button: {
-        backgroundColor: COLORS.white,
-        width: '120@s',
-        padding: '10@s',
-        marginHorizontal: '15@s',
-        borderRadius: 100,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    buttonText: {
-        fontSize: '16@s',
-        fontWeight: 'bold',
-        color: COLORS.dark,
-    }
 })

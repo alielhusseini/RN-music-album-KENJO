@@ -3,4 +3,6 @@ export interface IColors {
     light_green: string
     white: string
     dark: string
+    standout: string
+    gray: string
 }
