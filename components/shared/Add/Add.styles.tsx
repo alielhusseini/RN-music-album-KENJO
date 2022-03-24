@@ -14,7 +14,7 @@ export const styles = ScaledSheet.create({
         borderRadius: 50,
         elevation: 5,
     },
-    text: {
+    icon: {
         fontWeight: 'bold',
         fontSize: '20@s',
         color: COLORS.standout,
