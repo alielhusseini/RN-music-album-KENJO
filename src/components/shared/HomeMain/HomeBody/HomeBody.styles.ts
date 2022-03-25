@@ -52,8 +52,5 @@ export const styles = ScaledSheet.create({
     viewAllText: {
         color: COLORS.standout,
         fontSize: '12@s',
-    },
-    albumsItemContainer: {
-
     }
 })

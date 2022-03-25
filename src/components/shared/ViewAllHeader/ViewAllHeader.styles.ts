@@ -6,7 +6,8 @@ export const styles = ScaledSheet.create({
     container: {
         flexDirection: 'row',
         paddingHorizontal: '10@s',
-        paddingVertical: '5@s',
+        paddingTop: '5@s',
+        paddingVertical: '13@s',
         alignItems: 'center',
         justifyContent: 'space-between',
     },

@@ -45,7 +45,7 @@ export function HomeBody() {
                     <Text style={styles.albumsTitleText}>{activeTab} of the year</Text>
                     <TouchableOpacity onPress={handleViewAllPress}><Text style={styles.viewAllText}>View All</Text></TouchableOpacity>
                 </View>
-                <View style={styles.albumsItemContainer}>
+                <View>
                     {
                         activeTab === 'Artists' ?
                             < FlatList
@@ -68,7 +68,7 @@ export function HomeBody() {
                     <Text style={styles.albumsTitleText}>Popular {activeTab}</Text>
                     <TouchableOpacity onPress={handleViewAllPress}><Text style={styles.viewAllText}>View All</Text></TouchableOpacity>
                 </View>
-                <View style={styles.albumsItemContainer}>
+                <View>
                     {
                         activeTab === 'Artists' ?
                             < FlatList
