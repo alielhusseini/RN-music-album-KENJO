@@ -1,8 +1,8 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { styles } from './HomeFooter.styles'
+import { styles } from './Footer.styles'
 
-export function HomeFooter() {
+export function Footer() {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>&copy; Sounds like music.</Text>

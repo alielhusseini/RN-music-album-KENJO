@@ -5,6 +5,8 @@ import { styles } from './HomeBody.styles'
 import { AlbumCard, ArtistCard } from '../../Card'
 import { useMusicContext } from '../../../../hooks/useMusicContext'
 import { TabType } from '../../../providers/Music/MusicProvider.types'
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 const isButtonActiveFunction = (isButtonActive: string, checkedValue: string) => {
     return isButtonActive === checkedValue ? [styles.button, styles.buttonActive] : styles.button
@@ -13,6 +15,7 @@ const isButtonActiveFunction = (isButtonActive: string, checkedValue: string) =>
 export function HomeBody() {
 
     const { switchTab, activeTab } = useMusicContext()
+    const navigation = useNavigation<NativeStackNavigationProp<{ ViewAll: undefined }, 'ViewAll'>>()
 
     // This is a closure, purposely made to re-use the handleButtonPress functionality without creating n number of functions that do the same thing just have the setter function parameter changed
     const handleButtonPress = useCallback((tabName: TabType) => {
@@ -22,6 +25,10 @@ export function HomeBody() {
         };
         return eventHandler;
     }, [switchTab]);
+
+    const handleViewAllPress = useCallback(() => {
+        navigation.push('ViewAll')
+    }, [navigation])
 
     return (
         <View style={styles.mainContainer}>
@@ -36,7 +43,7 @@ export function HomeBody() {
             <View style={styles.albumsContainer}>
                 <View style={styles.albumsTitleContainer}>
                     <Text style={styles.albumsTitleText}>{activeTab} of the year</Text>
-                    <TouchableOpacity><Text style={styles.viewAllText}>View All</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={handleViewAllPress}><Text style={styles.viewAllText}>View All</Text></TouchableOpacity>
                 </View>
                 <View style={styles.albumsItemContainer}>
                     {
@@ -59,7 +66,7 @@ export function HomeBody() {
                 </View>
                 <View style={styles.albumsTitleContainer}>
                     <Text style={styles.albumsTitleText}>Popular {activeTab}</Text>
-                    <TouchableOpacity><Text style={styles.viewAllText}>View All</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={handleViewAllPress}><Text style={styles.viewAllText}>View All</Text></TouchableOpacity>
                 </View>
                 <View style={styles.albumsItemContainer}>
                     {
