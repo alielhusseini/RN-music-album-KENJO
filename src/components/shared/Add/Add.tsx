@@ -5,7 +5,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto'
 
 export function Add() {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} activeOpacity={.6}>
             <Fontisto name='music-note' style={styles.icon} />
         </TouchableOpacity>
     )

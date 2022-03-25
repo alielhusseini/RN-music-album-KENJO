@@ -1,8 +1,10 @@
 import { View, Text, TouchableOpacity, FlatList, GestureResponderEvent } from 'react-native'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import { data } from '../../../../data/data'
 import { styles } from './HomeBody.styles'
 import { AlbumCard, ArtistCard } from '../../Card'
+import { useMusicContext } from '../../../../hooks/useMusicContext'
+import { TabType } from '../../../providers/Music/MusicProvider.types'
 
 const isButtonActiveFunction = (isButtonActive: string, checkedValue: string) => {
     return isButtonActive === checkedValue ? [styles.button, styles.buttonActive] : styles.button
@@ -10,35 +12,35 @@ const isButtonActiveFunction = (isButtonActive: string, checkedValue: string) =>
 
 export function HomeBody() {
 
-    const [isButtonActive, setIsButtonActive] = useState<string>('Albums')
+    const { switchTab, activeTab } = useMusicContext()
 
     // This is a closure, purposely made to re-use the handleButtonPress functionality without creating n number of functions that do the same thing just have the setter function parameter changed
-    const handleButtonPress = useCallback((tabName: "Artists" | "Albums") => {
+    const handleButtonPress = useCallback((tabName: TabType) => {
 
         const eventHandler = (event: GestureResponderEvent) => {
-            setIsButtonActive(tabName);
+            switchTab(tabName);
         };
         return eventHandler;
-    }, [setIsButtonActive]);
+    }, [switchTab]);
 
     return (
         <View style={styles.mainContainer}>
             <View style={styles.buttonContainer}>
-                <TouchableOpacity onPress={handleButtonPress("Albums")} key='Albums' style={isButtonActiveFunction(isButtonActive, 'Albums')} >
+                <TouchableOpacity onPress={handleButtonPress("Albums")} key='Albums' style={isButtonActiveFunction(activeTab, 'Albums')} >
                     <Text style={styles.buttonText}>Albums</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={handleButtonPress("Artists")} style={isButtonActiveFunction(isButtonActive, 'Artists')}>
+                <TouchableOpacity onPress={handleButtonPress("Artists")} style={isButtonActiveFunction(activeTab, 'Artists')}>
                     <Text style={styles.buttonText}>Artists</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.albumsContainer}>
                 <View style={styles.albumsTitleContainer}>
-                    <Text style={styles.albumsTitleText}>{isButtonActive} of the year</Text>
+                    <Text style={styles.albumsTitleText}>{activeTab} of the year</Text>
                     <TouchableOpacity><Text style={styles.viewAllText}>View All</Text></TouchableOpacity>
                 </View>
                 <View style={styles.albumsItemContainer}>
                     {
-                        isButtonActive === 'Artists' ?
+                        activeTab === 'Artists' ?
                             < FlatList
                                 horizontal
                                 showsHorizontalScrollIndicator={false}
@@ -56,12 +58,12 @@ export function HomeBody() {
                     }
                 </View>
                 <View style={styles.albumsTitleContainer}>
-                    <Text style={styles.albumsTitleText}>Popular {isButtonActive}</Text>
+                    <Text style={styles.albumsTitleText}>Popular {activeTab}</Text>
                     <TouchableOpacity><Text style={styles.viewAllText}>View All</Text></TouchableOpacity>
                 </View>
                 <View style={styles.albumsItemContainer}>
                     {
-                        isButtonActive === 'Artists' ?
+                        activeTab === 'Artists' ?
                             < FlatList
                                 horizontal
                                 showsHorizontalScrollIndicator={false}
