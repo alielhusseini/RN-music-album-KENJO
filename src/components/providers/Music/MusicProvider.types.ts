@@ -8,6 +8,9 @@ export interface IMusic {
     dispatch: React.Dispatch<{ type: string; payload: any; }>,
     switchTab(tab: TabType): void,
     activeTab: TabType
+    isLoading: boolean
+    toggleLoading(load: boolean): void
+    isError: boolean
 }
 
 export type TabType = "Artists" | "Albums"

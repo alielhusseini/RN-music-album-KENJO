@@ -7,4 +7,5 @@ export const COLORS: IColors = {
     dark: '#17191A',
     standout: '#df8054',
     gray: '#eeeeee22',
+    danger: '#ff0000',
 }

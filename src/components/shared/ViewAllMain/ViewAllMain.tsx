@@ -1,28 +1,27 @@
-import { View, FlatList } from 'react-native'
-import React from 'react'
+import { View, FlatList, Text } from 'react-native'
+import React, { Children } from 'react'
 import { styles } from './ViewAllMain.styles'
 import { useMusicContext } from '../../../hooks/useMusicContext'
-import { data } from '../../../data/data'
 import { AlbumDetailCard, ArtistDetailCard } from '../Card'
 
 export function ViewAllMain() {
 
-    const { activeTab } = useMusicContext()
+    const { activeTab, state } = useMusicContext()
 
     return (
         <View style={styles.container}>
             <View style={styles.cardContainer}>
                 {
                     activeTab === 'Artists' ?
-                        < FlatList
+                        <FlatList
                             showsVerticalScrollIndicator={false}
-                            data={data.Artists}
+                            data={state.Artists}
                             keyExtractor={(item, index) => item._id || index.toString()}
                             renderItem={({ item }) => <ArtistDetailCard {...item} />}
                         /> :
                         < FlatList
                             showsVerticalScrollIndicator={false}
-                            data={data.Albums}
+                            data={state.Albums}
                             keyExtractor={(item, index) => item._id || index.toString()}
                             renderItem={({ item }) => <AlbumDetailCard {...item} />}
                         />

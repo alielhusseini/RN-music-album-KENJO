@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
-import React, { useCallback } from 'react'
+import React, { useCallback, useLayoutEffect } from 'react'
 import { IAlbum } from '../../../../data/data.types'
 import { styles } from './AlbumCard.styles'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
@@ -12,6 +12,10 @@ export function AlbumCard({ _id, title, artistId, coverUrl, year, genre }: IAlbu
     const handleNavigationDetailedInfo = useCallback(() => {
         navigation.push('Details', { _id: _id as string })
     }, [navigation])
+
+    useLayoutEffect(() => {
+        // console.log('first') 
+    }, [])
 
     return (
         <TouchableOpacity onPress={handleNavigationDetailedInfo} style={styles.cardContainer}>

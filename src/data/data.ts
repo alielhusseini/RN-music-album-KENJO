@@ -1,5 +1,8 @@
 import { IData } from './data.types'
 
+// minimum: 1909 - 01 - 01T00: 00: 00.000Z
+// maximum: 2030 - 12 - 31T00: 00: 00.000Z
+
 export const data: IData = {
     Albums: [{
         "_id": "album1",
