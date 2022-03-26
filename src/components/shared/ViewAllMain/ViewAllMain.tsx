@@ -11,7 +11,7 @@ export function ViewAllMain() {
 
     return (
         <View style={styles.container}>
-            <View>
+            <View style={styles.cardContainer}>
                 {
                     activeTab === 'Artists' ?
                         < FlatList

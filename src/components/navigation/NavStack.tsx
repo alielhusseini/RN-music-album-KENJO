@@ -3,8 +3,9 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { AddMusic, Details, Home, ViewAll } from '../screens'
 import { screenOptions } from './screenOptions'
+import { NavType } from './NavStack.types'
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator<NavType>()
 
 export function NavStack() {
     return (
