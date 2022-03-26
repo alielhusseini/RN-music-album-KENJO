@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = 'http://localhost:3000/'
+const BASE_URL = 'http://192.168.1.108:3000/' // 'http://localhost:3000/'
 
 // no interceptors on
 const API = axios.create({
@@ -20,7 +20,7 @@ interface IAlbum {
 }
 
 export const getAlbums = () => API.get('albums/all')
-export const getAlbum = ({ id }: { id: string }) => API.get(`album/${id}`)
+export const getAlbum = ({ id, controller }: { id: string, controller: AbortController }) => API.get(`album/${id}`, { signal: controller.signal })
 export const updateAlbum = ({ id, data }: { id: string, data: IAlbum }) => API.put(`album/${id}`, data)
 export const deleteAlbum = ({ id }: { id: string }) => API.delete(`album/${id}`)
 
@@ -33,6 +33,6 @@ interface IArtist {
 }
 
 export const getArtists = () => API.get('artists/all')
-export const getArtist = ({ id }: { id: string }) => API.get(`artist/${id}`)
+export const getArtist = ({ id, controller }: { id: string, controller: AbortController }) => API.get(`artist/${id}`, { signal: controller.signal })
 export const updateArtist = ({ id, data }: { id: string, data: IArtist }) => API.put(`artist/${id}`, data)
 export const deleteArtist = ({ id }: { id: string }) => API.delete(`artist/${id}`)

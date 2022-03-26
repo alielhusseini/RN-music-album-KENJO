@@ -42,7 +42,7 @@ export const MusicContextProvider: FC<PropsWithChildren<{}>> = ({ children }) =>
     const [state, dispatch] = useReducer(reducer, musicInitState)
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [activeTab, setActiveTab] = useState<TabType>('Albums')
-    const [isError, setIsError] = useState<boolean>(false);
+    const [isError, setIsError] = useState<boolean>(false)
 
     const switchTab = useCallback((tab: TabType) => {
         setActiveTab(tab)
@@ -53,8 +53,8 @@ export const MusicContextProvider: FC<PropsWithChildren<{}>> = ({ children }) =>
     }, [setIsLoading])
 
     const fetch = async () => {
-        setIsError(false);
-        toggleLoading(true);
+        setIsError(false)
+        toggleLoading(true)
 
         try {
             let apiData = null
@@ -66,7 +66,7 @@ export const MusicContextProvider: FC<PropsWithChildren<{}>> = ({ children }) =>
             dispatch({ type: CRUD.READALL, payload: { data, activeTab } })
 
         } catch (err: any) {
-            setIsError(true);
+            setIsError(true)
         } finally {
             toggleLoading(false)
         }
@@ -74,7 +74,7 @@ export const MusicContextProvider: FC<PropsWithChildren<{}>> = ({ children }) =>
 
     useEffect(() => {
         fetch()
-    }, [activeTab]);
+    }, [activeTab])
 
     return <MusicContext.Provider value={{ state, dispatch, switchTab, activeTab, isLoading, toggleLoading, isError }
     }>{children}</MusicContext.Provider>

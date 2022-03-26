@@ -31,7 +31,7 @@ export const styles = ScaledSheet.create({
     },
     iconEdit: {
         fontSize: '16@s',
-        color: COLORS.light_green,
+        color: COLORS.blue,
     },
     iconDanger: {
         fontSize: '16@s',

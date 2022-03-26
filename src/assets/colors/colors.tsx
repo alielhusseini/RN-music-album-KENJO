@@ -8,4 +8,5 @@ export const COLORS: IColors = {
     standout: '#df8054',
     gray: '#eeeeee22',
     danger: '#ff0000',
+    blue: '#1AA7ed'
 }

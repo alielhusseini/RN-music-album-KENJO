@@ -6,4 +6,5 @@ export interface IColors {
     standout: string
     gray: string
     danger: string
+    blue: string
 }

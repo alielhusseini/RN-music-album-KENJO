@@ -1,5 +1,5 @@
 import { SafeAreaView, StatusBar, ScrollView } from 'react-native'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { PropType } from './Details.types';
 import { ScaledSheet } from 'react-native-size-matters';
 import { COLORS } from '../../../assets/colors';
@@ -9,15 +9,11 @@ export function Details({ route, navigation }: PropType) {
 
     const { _id } = route.params;
 
-    useEffect(() => {
-
-    }, [])
-
     return (
         <SafeAreaView style={styles.body}>
             <StatusBar animated={true} backgroundColor={COLORS.white} barStyle="dark-content" />
             <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-                <DetailsHeader navigation={navigation} />
+                <DetailsHeader _id={_id} navigation={navigation} />
             </ScrollView>
         </SafeAreaView>
     )
