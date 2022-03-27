@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput, Alert } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, Alert, TextComponent } from 'react-native'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { styles } from './DetailsMain.styles'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
@@ -7,11 +7,12 @@ import Octicons from 'react-native-vector-icons/Octicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { useMusicContext } from '../../../hooks/useMusicContext'
 import { IAlbum, IArtist } from '../../../data/data.types'
-import { deleteAlbum, deleteArtist, getArtist, updateAlbum, updateArtist } from '../../../api'
+import { deleteAlbum, deleteArtist, getArtist, getArtists, updateAlbum, updateArtist } from '../../../api'
 import moment from 'moment'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import DropDownPicker from 'react-native-dropdown-picker';
+import RNPickerSelect from "react-native-picker-select";
+
 
 export function DetailsMain({ data }: { data: IAlbum | IArtist }) {
 
@@ -19,6 +20,7 @@ export function DetailsMain({ data }: { data: IAlbum | IArtist }) {
     const [isEditMode, setIsEditMode] = useState<boolean>(false)
     const { activeTab, toggleTriggerFetch } = useMusicContext()
     const [name, setName] = useState<string>('')
+    const [names, setNames] = useState<{ label: string, value: string }[]>([])
     const [localData, setLocalData] = useState<IAlbum | IArtist>({ ...data })
     const navigation = useNavigation<NativeStackNavigationProp<{ Home: undefined }, 'Home'>>()
 
@@ -48,7 +50,7 @@ export function DetailsMain({ data }: { data: IAlbum | IArtist }) {
                     </View>
                     <View style={styles.infoEditContainer}>
                         <Text style={styles.infoEdit}>Artist Name: </Text>
-
+                        <RNPickerSelect items={names} value={localData.artistId} onValueChange={handleChangeInput('artistId')} />
                     </View>
                     <View style={styles.infoEditContainer}>
                         <Text style={styles.infoEdit}>Genre: </Text>
@@ -117,7 +119,14 @@ export function DetailsMain({ data }: { data: IAlbum | IArtist }) {
         let innerData = data as IAlbum
         try {
             const { data: { name } } = await getArtist({ id: innerData.artistId, controller: controller.current })
+            const { data: allArtists } = await getArtists()
             setName(name)
+            setNames(allArtists.map((artist: IArtist) => {
+                return {
+                    label: artist.name,
+                    value: artist._id
+                }
+            }))
         } catch (err) {
             //
         }
@@ -144,19 +153,23 @@ export function DetailsMain({ data }: { data: IAlbum | IArtist }) {
     const handleSave = useCallback(async () => {
         if (activeTab === 'Albums') {
             const innerData = localData as IAlbum
+            if (!innerData.title || !innerData.genre || !innerData.year || !innerData.coverUrl) {
+                Alert.alert('Error', 'Please fill all the fields')
+                return
+            }
 
-            // if (!innerData.title || !innerData.genre || !innerData.year || !innerData.coverUrl) {
-            //     Alert.alert('Error', 'Please fill all the fields')
-            //     return
-            // }
+            if (Number(innerData.year) === NaN || innerData.year < 1909 || innerData.year > 2030) {
+                Alert.alert('Error', 'Please fill the year correctly')
+                return
+            }
 
-            // try {
-            //     await updateAlbum({ id: innerData._id, data: innerData })
-            //     toggleTriggerFetch()
-            //     navigation.replace('Home')
-            // } catch (err) {
-            //     //
-            // }
+            try {
+                await updateAlbum({ id: innerData._id, data: innerData })
+                toggleTriggerFetch()
+                navigation.replace('Home')
+            } catch (err) {
+                //
+            }
         } else {
             const innerData = localData as IArtist
 

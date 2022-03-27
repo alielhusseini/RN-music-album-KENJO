@@ -6,5 +6,9 @@ import { DetailsHeader } from "./DetailsHeader/DetailsHeader";
 import { Empty } from "./Empty/Empty";
 import { Loader } from "./Loader/Loader";
 import { Error } from "./Error/Error";
+import { AddMusicHeader } from "./AddMusicHeader/AddMusicHeader";
+import { AddMusicMain } from "./AddMusicMain/AddMusicMain";
+import { ViewAllHeader } from "./ViewAllHeader/ViewAllHeader";
+import { ViewAllMain } from "./ViewAllMain/ViewAllMain";
 
-export { HomeHeader, HomeMain, Footer, Add, DetailsHeader, Empty, Loader, Error }
+export { HomeHeader, HomeMain, Footer, Add, DetailsHeader, Empty, Loader, Error, AddMusicHeader, AddMusicMain, ViewAllHeader, ViewAllMain }

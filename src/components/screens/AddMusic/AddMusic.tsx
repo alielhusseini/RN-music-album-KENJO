@@ -2,11 +2,9 @@ import { View, Text, TouchableOpacity, StatusBar, SafeAreaView, ScrollView, Keyb
 import React, { useCallback } from 'react'
 import { ScaledSheet } from 'react-native-size-matters'
 import { COLORS } from '../../../assets/colors'
-import { useMusicContext } from '../../../hooks/useMusicContext'
+import { AddMusicHeader, AddMusicMain, Footer } from '../../shared'
 
 export function AddMusic() {
-
-    const { activeTab } = useMusicContext()
 
     const handlePressKeyboardDismiss = useCallback((event: GestureResponderEvent) => {
         Keyboard.dismiss()
@@ -18,7 +16,9 @@ export function AddMusic() {
             <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
                 <TouchableOpacity activeOpacity={1} onPress={handlePressKeyboardDismiss} style={{ flex: 1 }}>
                     <View>
-                        <Text>Add {activeTab}</Text>
+                        <AddMusicHeader />
+                        <AddMusicMain />
+                        <Footer />
                     </View>
                 </TouchableOpacity>
             </ScrollView>
