@@ -10,7 +10,11 @@ export interface IMusic {
     activeTab: TabType
     isLoading: boolean
     toggleLoading(load: boolean): void
-    isError: boolean
+    isError: {
+        error: boolean,
+        asyncHandler: null | (() => Promise<void>)
+    },
+    toggleTriggerFetch(): void
 }
 
 export type TabType = "Artists" | "Albums"

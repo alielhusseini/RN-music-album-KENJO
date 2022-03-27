@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { AddMusic, Details, Home, ViewAll } from '../screens'
 import { screenOptions } from './screenOptions'
 import { NavType } from './NavStack.types'
+import { Text } from 'react-native'
 
 const Stack = createNativeStackNavigator<NavType>()
 

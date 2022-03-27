@@ -17,14 +17,14 @@ export function AlbumDetailCard({ _id, title, artistId, coverUrl, year, genre }:
         navigation.push('Details', { _id: _id as string })
     }, [navigation])
 
-    const fetchName = async () => {
+    const fetchName = useCallback(async () => {
         try {
             const { data: { name } } = await getArtist({ id: artistId, controller: controller.current })
             setName(name)
         } catch (err: any) {
             //
         }
-    }
+    }, [])
 
     useEffect(() => {
         fetchName()
@@ -34,7 +34,7 @@ export function AlbumDetailCard({ _id, title, artistId, coverUrl, year, genre }:
     return (
         <TouchableOpacity onPress={handleNavigationDetailedInfo} style={styles.cardContainer}>
             <Image
-                source={{ uri: coverUrl }}
+                source={{ uri: coverUrl ? coverUrl : 'https://japantravel.navitime.com/static/parche/20220323-1/images/atomic-design/pc/component/noimage-article.png' }}
                 resizeMode="cover"
                 style={styles.albumCover}
             />

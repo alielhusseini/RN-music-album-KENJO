@@ -4,7 +4,7 @@ export interface IData {
 }
 
 interface IMongo {
-    _id?: string
+    _id: string
     _createdAt?: string
     _updatedAt?: string
 }

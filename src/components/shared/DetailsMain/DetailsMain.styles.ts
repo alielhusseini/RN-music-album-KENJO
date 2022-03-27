@@ -1,3 +1,4 @@
+import { Dimensions } from "react-native";
 import { ScaledSheet } from "react-native-size-matters";
 import { COLORS } from "../../../assets/colors";
 
@@ -38,9 +39,24 @@ export const styles = ScaledSheet.create({
         color: COLORS.danger,
     },
     // card details
-    cardDetails: {
+    cardDetailsContainer: {
         width: '100%',
-        height: 100,
-        paddingTop: '16@s',
-    }
+        paddingTop: '15@s',
+    },
+    info: {
+        fontSize: '25@s',
+        color: COLORS.dark,
+        marginBottom: '15@s',
+    },
+    infoEdit: {
+        fontSize: '20@s',
+        color: COLORS.dark,
+    },
+    infoEditContainer: {
+        marginBottom: '15@s',
+    },
+    input: {
+        fontSize: '20@s',
+        color: COLORS.blue,
+    },
 })

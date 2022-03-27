@@ -1,5 +1,5 @@
 import { Keyboard, TouchableOpacity, GestureResponderEvent, SafeAreaView, StatusBar, ScrollView } from 'react-native'
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { HomeHeader, HomeMain, Footer, Add, Error } from '../../shared'
 import { ScaledSheet } from 'react-native-size-matters'
 import { COLORS } from '../../../assets/colors'
@@ -13,7 +13,7 @@ export function Home() {
         Keyboard.dismiss()
     }, [Keyboard])
 
-    if (isError) {
+    if (isError.error) {
         return (
             <SafeAreaView style={styles.body}>
                 <StatusBar animated={true} backgroundColor={COLORS.white} barStyle="dark-content" />

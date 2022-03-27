@@ -33,7 +33,11 @@ export const MusicContext = createContext<IMusic>({
     switchTab: (tab) => { },
     isLoading: true,
     toggleLoading: (load) => { },
-    isError: false
+    isError: {
+        error: false,
+        asyncHandler: null
+    },
+    toggleTriggerFetch: () => { }
 })
 
 // creating a music provider (the useContext of the music context is in the hooks directory where I create custom hooks there)
@@ -42,7 +46,8 @@ export const MusicContextProvider: FC<PropsWithChildren<{}>> = ({ children }) =>
     const [state, dispatch] = useReducer(reducer, musicInitState)
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [activeTab, setActiveTab] = useState<TabType>('Albums')
-    const [isError, setIsError] = useState<boolean>(false)
+    const [isError, setIsError] = useState<{ error: boolean, asyncHandler: null | (() => Promise<void>) }>({ error: false, asyncHandler: null })
+    const [triggerFetch, setTriggerFetch] = useState<boolean>(false);
 
     const switchTab = useCallback((tab: TabType) => {
         setActiveTab(tab)
@@ -52,8 +57,12 @@ export const MusicContextProvider: FC<PropsWithChildren<{}>> = ({ children }) =>
         setIsLoading(load)
     }, [setIsLoading])
 
+    const toggleTriggerFetch = useCallback(() => {
+        setTriggerFetch(prevState => !prevState);
+    }, [setTriggerFetch]);
+
     const fetch = async () => {
-        setIsError(false)
+        setIsError({ error: false, asyncHandler: null })
         toggleLoading(true)
 
         try {
@@ -66,7 +75,10 @@ export const MusicContextProvider: FC<PropsWithChildren<{}>> = ({ children }) =>
             dispatch({ type: CRUD.READALL, payload: { data, activeTab } })
 
         } catch (err: any) {
-            setIsError(true)
+            setIsError({
+                error: true,
+                asyncHandler: fetch
+            })
         } finally {
             toggleLoading(false)
         }
@@ -74,8 +86,8 @@ export const MusicContextProvider: FC<PropsWithChildren<{}>> = ({ children }) =>
 
     useEffect(() => {
         fetch()
-    }, [activeTab])
+    }, [activeTab, triggerFetch]);
 
-    return <MusicContext.Provider value={{ state, dispatch, switchTab, activeTab, isLoading, toggleLoading, isError }
+    return <MusicContext.Provider value={{ state, dispatch, switchTab, activeTab, isLoading, toggleLoading, isError, toggleTriggerFetch }
     }>{children}</MusicContext.Provider>
 }
