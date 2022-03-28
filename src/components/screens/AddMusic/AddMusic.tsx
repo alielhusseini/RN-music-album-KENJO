@@ -13,9 +13,9 @@ export function AddMusic() {
     return (
         <SafeAreaView style={styles.body}>
             <StatusBar animated={true} backgroundColor={COLORS.white} barStyle="dark-content" />
-            <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-                <TouchableOpacity activeOpacity={1} onPress={handlePressKeyboardDismiss} style={{ flex: 1 }}>
-                    <View>
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+                <TouchableOpacity activeOpacity={1} onPress={handlePressKeyboardDismiss} style={{ flexGrow: 1 }}>
+                    <View style={{ flexGrow: 1 }}>
                         <AddMusicHeader />
                         <AddMusicMain />
                         <Footer />

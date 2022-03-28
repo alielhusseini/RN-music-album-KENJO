@@ -1,7 +1,7 @@
 import React, { createContext, FC, PropsWithChildren, useCallback, useEffect, useReducer, useState } from "react";
 import { IMusic, TabType } from "./MusicProvider.types";
 import { CRUD } from "./constants";
-import { handleCreate, handleDelete, handleRead, handleReadAll, handleUpdate } from "./reducerHandlersFunctions";
+import { handleReadAll } from "./reducerHandlersFunctions";
 import { getAlbums, getArtists } from "../../../api";
 
 // this is the initial state
@@ -11,11 +11,7 @@ export const musicInitState = {
 }
 
 const reducerHandlers = {
-    [CRUD.CREATE]: handleCreate,
-    [CRUD.READ]: handleRead,
     [CRUD.READALL]: handleReadAll,
-    [CRUD.UPDATE]: handleUpdate,
-    [CRUD.DELETE]: handleDelete,
 }
 
 // this is the reducer function that the useReducer will disptach

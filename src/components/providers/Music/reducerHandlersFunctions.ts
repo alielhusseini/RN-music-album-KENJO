@@ -19,11 +19,3 @@ export const handleReadAll = (state: IMusic['state'], payload: any) => {
 
     return newState
 }
-
-export const handleCreate = (state: IMusic['state'], payload: any) => { return state }
-
-export const handleRead = (state: IMusic['state'], payload: any) => { return state }
-
-export const handleUpdate = (state: IMusic['state'], payload: any) => { return state }
-
-export const handleDelete = (state: IMusic['state'], payload: any) => { return state }

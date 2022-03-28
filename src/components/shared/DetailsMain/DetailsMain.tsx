@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, TextInput, Alert, TextComponent } from 'react-native'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { styles } from './DetailsMain.styles'
+import { styles, pickerSelectStyles } from './DetailsMain.styles'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import Entypo from 'react-native-vector-icons/Entypo'
 import Octicons from 'react-native-vector-icons/Octicons'
@@ -50,7 +50,7 @@ export function DetailsMain({ data }: { data: IAlbum | IArtist }) {
                     </View>
                     <View style={styles.infoEditContainer}>
                         <Text style={styles.infoEdit}>Artist Name: </Text>
-                        <RNPickerSelect items={names} value={localData.artistId} onValueChange={handleChangeInput('artistId')} />
+                        <RNPickerSelect style={pickerSelectStyles} items={names} value={localData.artistId} onValueChange={handleChangeInput('artistId')} />
                     </View>
                     <View style={styles.infoEditContainer}>
                         <Text style={styles.infoEdit}>Genre: </Text>
@@ -153,12 +153,12 @@ export function DetailsMain({ data }: { data: IAlbum | IArtist }) {
     const handleSave = useCallback(async () => {
         if (activeTab === 'Albums') {
             const innerData = localData as IAlbum
-            if (!innerData.title || !innerData.genre || !innerData.year || !innerData.coverUrl) {
+            if (!innerData.title || !innerData.genre || !innerData.year || !innerData.coverUrl || !innerData.artistId) {
                 Alert.alert('Error', 'Please fill all the fields')
                 return
             }
 
-            if (Number(innerData.year) === NaN || innerData.year < 1909 || innerData.year > 2030) {
+            if (!Number(innerData.year) || innerData.year < 1909 || innerData.year > 2030) {
                 Alert.alert('Error', 'Please fill the year correctly')
                 return
             }

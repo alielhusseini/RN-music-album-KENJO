@@ -7,7 +7,5 @@ export function Loader({ show, children }: PropsWithChildren<{ show: boolean }>)
 
     if (show) return <View style={styles.container}><ActivityIndicator size={"large"} color={COLORS.white} /></View>
 
-    return <>
-        {children}
-    </>
+    return <>{children}</>
 }
