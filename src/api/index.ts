@@ -31,7 +31,7 @@ interface IArtist {
     name: string
     photoUrl: string
     birthdate: string
-    deathDate: string
+    deathDate?: string | null
 }
 
 type ArtistType = Omit<IArtist, '_id'>

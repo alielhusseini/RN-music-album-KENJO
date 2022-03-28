@@ -21,5 +21,5 @@ export interface IArtist extends IMongo {
     "name": string,
     "photoUrl": string,
     "birthdate": string,
-    "deathDate": string
+    "deathDate"?: string | null
 }
